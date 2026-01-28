@@ -1,10 +1,12 @@
-const CACHE_NAME = 'timrr-v11';
+const CACHE_NAME = 'timrr-v12';
 const ASSETS = [
     './',
     './index.html',
     './style.css',
     './app.js',
     './manifest.json',
+    './assets/icons/icon-192.png',
+    './assets/icons/icon-512.png',
     'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap',
     'https://unpkg.com/lucide@latest'
 ];
