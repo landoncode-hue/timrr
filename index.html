@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timrr – Minimalist Timer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="theme-system">
+    <header>
+        <div class="header-overlay">
+            <button id="menu-toggle" class="icon-btn" title="Menu">
+                <i data-lucide="menu"></i>
+            </button>
+            <h1>timrr</h1>
+            <button id="theme-toggle" class="icon-btn" title="Toggle Theme">
+                <i data-lucide="moon"></i>
+            </button>
+            <button id="help-toggle" class="icon-btn" title="Keyboard Shortcuts">
+                <i data-lucide="help-circle"></i>
+            </button>
+        </div>
+    </header>
+
+    <div id="help-overlay" class="modal-overlay hidden">
+        <div class="modal help-modal">
+            <h2>Keyboard Shortcuts</h2>
+            <div class="shortcut-list">
+                <div class="shortcut-item"><span>Space</span> <span>Start / Pause</span></div>
+                <div class="shortcut-item"><span>R</span> <span>Reset Timer</span></div>
+                <div class="shortcut-item"><span>M</span> <span>Toggle Sidebar</span></div>
+                <div class="shortcut-item"><span>A</span> <span>Add New Event</span></div>
+                <div class="shortcut-item"><span>?</span> <span>Show Shortcuts</span></div>
+                <div class="shortcut-item"><span>Esc</span> <span>Close / Cancel</span></div>
+            </div>
+            <button id="help-close-btn" class="btn-primary"
+                style="margin-top: 2rem; width: auto; padding: 0.8rem 2rem;">Got it</button>
+        </div>
+    </div>
+
+    <main id="focus-area">
+        <!-- Massive timer injected here -->
+    </main>
+
+    <!-- Sidebar / Hidden Menu -->
+    <aside id="sidebar" class="sidebar hidden">
+        <div class="sidebar-header">
+            <h2>Events</h2>
+            <button id="add-btn" class="icon-btn" title="Add Timer">
+                <i data-lucide="plus"></i>
+            </button>
+        </div>
+        <div id="timers-container">
+            <!-- Secondary timers list -->
+        </div>
+    </aside>
+
+    <div id="sidebar-overlay" class="sidebar-overlay hidden"></div>
+
+    <!-- Add Timer Modal -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <h2>Schedule Event</h2>
+            <form id="add-timer-form">
+                <div class="input-group">
+                    <label for="title">Event Title</label>
+                    <input type="text" id="title" placeholder="e.g., Deep Work" required>
+                </div>
+                <div class="time-pickers">
+                    <div class="picker">
+                        <label>Hr</label>
+                        <input type="number" id="hours" min="0" max="23" value="0">
+                    </div>
+                    <div class="picker">
+                        <label>Min</label>
+                        <input type="number" id="minutes" min="0" max="59" value="25">
+                    </div>
+                    <div class="picker">
+                        <label>Sec</label>
+                        <input type="number" id="seconds" min="0" max="59" value="0">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="cancel-btn" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW registration failed', err));
+            });
+        }
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
